@@ -11,7 +11,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Devicon Vector Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
@@ -20,15 +20,20 @@
 
   <style>
     :root {
-      --bg-dark: #070913;
-      --card-bg: rgba(15, 23, 42, 0.75);
-      --card-border: rgba(99, 102, 241, 0.22);
+      /* Formal Corporate Engineering Palette (No neon / no gaming saturation) */
+      --bg-dark: #0f172a;
+      --bg-card: rgba(30, 41, 59, 0.94);
+      --border-subtle: rgba(148, 163, 184, 0.16);
+      --border-focus: rgba(2, 132, 199, 0.45);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       
-      --grad-primary: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-      --grad-cyan: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
-      --glow-purple: rgba(168, 85, 247, 0.35);
+      /* Formal Corporate Accents */
+      --primary-blue: #0284c7;
+      --primary-navy: #1e3a8a;
+      --grad-enterprise: linear-gradient(135deg, #0284c7 0%, #2563eb 50%, #3b82f6 100%);
+      --grad-cyan-clean: linear-gradient(135deg, #0284c7 0%, #0d9488 100%);
+      --shadow-enterprise: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -43,9 +48,9 @@
     body {
       overflow-x: hidden;
       position: relative;
-      background: radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-                  radial-gradient(circle at 85% 75%, rgba(236, 72, 153, 0.15) 0%, transparent 40%),
-                  radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.08) 0%, transparent 60%);
+      background: radial-gradient(circle at 20% 15%, rgba(2, 132, 199, 0.06) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 85%, rgba(30, 58, 138, 0.08) 0%, transparent 50%),
+                  #0f172a;
       background-attachment: fixed;
     }
 
@@ -53,22 +58,22 @@
     img, video { max-width: 100%; display: block; }
     
     .font-mono { font-family: 'JetBrains Mono', monospace; }
-    .font-heading { font-family: 'Space Grotesk', sans-serif; }
+    .font-heading { font-family: 'Plus Jakarta Sans', sans-serif; }
     
     .gradient-text {
-      background: var(--grad-primary);
+      background: var(--grad-enterprise);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
     }
     
     .gradient-cyan-text {
-      background: var(--grad-cyan);
+      background: var(--grad-cyan-clean);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    /* Ambient Glow Background */
+    /* Ambient Subtle Clean Background Glows */
     .ambient-glow {
       position: fixed;
       width: 520px;
@@ -77,18 +82,66 @@
       filter: blur(140px);
       pointer-events: none;
       z-index: 0;
-      opacity: 0.4;
+      opacity: 0.15;
       animation: pulseGlow 12s ease-in-out infinite alternate;
     }
-    .glow-1 { top: -100px; left: -100px; background: #6366f1; }
-    .glow-2 { bottom: -100px; right: -100px; background: #ec4899; animation-delay: -6s; }
+    .glow-1 { top: -100px; left: -100px; background: #0284c7; }
+    .glow-2 { bottom: -100px; right: -100px; background: #1e3a8a; animation-delay: -6s; }
 
     @keyframes pulseGlow {
       0% { transform: scale(1) translate(0, 0); }
-      100% { transform: scale(1.3) translate(50px, 40px); }
+      100% { transform: scale(1.15) translate(30px, 20px); }
     }
 
-    /* Parallax Floating Background Logos */
+    /* ==========================================================================
+       AUTHENTIC VISIBLE DEVOPS INFINITY BACKGROUND
+       Static multi-color segments with vibrant gradient fluid motion stream
+       ========================================================================== */
+    .devops-bg-animation-wrap {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90vw;
+      max-width: 1050px;
+      height: auto;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+      filter: drop-shadow(0 0 40px rgba(2, 132, 199, 0.2));
+    }
+    .devops-bg-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Base segments, slightly muted to let the moving gradient shine */
+    .devops-segment {
+      fill: none;
+      stroke-width: 24;
+      stroke-linecap: butt;
+      stroke-linejoin: round;
+      opacity: 0.25;
+    }
+
+    /* The moving stream: now using the colorful DevOps gradient */
+    .continuous-infinity-stream {
+      fill: none;
+      stroke: url(#devopsPulseGrad);
+      stroke-width: 26;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 90 400;
+      animation: flowInfinityLoop 7s linear infinite;
+    }
+
+    @keyframes flowInfinityLoop {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -490; }
+    }
+
+    /* Parallax Background Icons */
     .parallax-bg-layer {
       position: fixed;
       inset: 0;
@@ -114,9 +167,9 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(7, 9, 19, 0.85);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
     }
     .nav .wrap {
       max-width: 1200px;
@@ -126,20 +179,19 @@
       align-items: center;
       justify-content: space-between;
     }
-    .brand { font-size: 22px; font-weight: 800; }
+    .brand { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
     .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
     .nav a.link {
       padding: 6px 12px;
-      border-radius: 10px;
+      border-radius: 8px;
       font-size: 13.5px;
       font-weight: 600;
       color: var(--text-muted);
-      transition: all 0.3s ease;
+      transition: all 0.25s ease;
     }
     .nav a.link:hover {
       color: #fff;
-      background: rgba(99, 102, 241, 0.15);
-      transform: translateY(-2px);
+      background: rgba(2, 132, 199, 0.12);
     }
 
     /* Hero Section */
@@ -162,12 +214,11 @@
       gap: 10px;
       padding: 6px 16px;
       border-radius: 999px;
-      background: rgba(99, 102, 241, 0.15);
-      border: 1px solid rgba(99, 102, 241, 0.4);
+      background: rgba(2, 132, 199, 0.1);
+      border: 1px solid rgba(2, 132, 199, 0.35);
       font-size: 13px;
-      color: #a5b4fc;
+      color: #38bdf8;
       margin-bottom: 20px;
-      box-shadow: 0 0 25px rgba(99, 102, 241, 0.25);
     }
     .status-dot {
       width: 8px;
@@ -180,14 +231,14 @@
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
     .title {
-      font-size: 50px;
+      font-size: 48px;
       font-weight: 800;
-      line-height: 1.12;
-      letter-spacing: -1.5px;
+      line-height: 1.15;
+      letter-spacing: -1.2px;
       margin-bottom: 18px;
     }
     .subtitle {
-      font-size: 17.5px;
+      font-size: 17px;
       color: var(--text-muted);
       line-height: 1.6;
       margin-bottom: 24px;
@@ -207,36 +258,20 @@
       justify-content: center;
       align-items: center;
     }
-    .avatar-glow {
-      position: absolute;
-      width: 290px;
-      height: 290px;
-      background: var(--grad-primary);
-      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-      filter: blur(40px);
-      opacity: 0.5;
-      animation: morphGradient 9s linear infinite;
-    }
-    @keyframes morphGradient {
-      0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(0deg); }
-      50% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: rotate(180deg); }
-      100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(360deg); }
-    }
     .avatar {
       position: relative;
-      width: 260px;
-      height: 260px;
-      border-radius: 28px;
+      width: 250px;
+      height: 250px;
+      border-radius: 20px;
       object-fit: cover;
-      border: 2px solid rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(148, 163, 184, 0.2);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-      transform: perspective(800px) rotateY(-8deg) rotateX(4deg);
-      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: all 0.4s ease;
     }
     .avatar:hover {
-      transform: perspective(800px) rotateY(0deg) rotateX(0deg) scale(1.04);
-      border-color: rgba(168, 85, 247, 0.6);
-      box-shadow: 0 0 35px var(--glow-purple);
+      transform: translateY(-4px);
+      border-color: #0284c7;
+      box-shadow: 0 20px 40px rgba(2, 132, 199, 0.2);
     }
 
     /* Hero Tech Matrix */
@@ -249,46 +284,27 @@
     .matrix-card {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
+      border-radius: 12px;
       padding: 16px 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: all 0.3s ease;
     }
-    .matrix-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--grad-primary);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      z-index: 0;
-    }
-    .matrix-card i, .matrix-card span {
-      position: relative;
-      z-index: 1;
-    }
-    .matrix-card i {
-      font-size: 32px;
-      transition: transform 0.4s ease;
-    }
+    .matrix-card i { font-size: 30px; }
     .matrix-card span {
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 600;
       color: var(--text-muted);
     }
     .matrix-card:hover {
-      transform: translateY(-6px) scale(1.05);
-      border-color: rgba(255, 255, 255, 0.35);
-      box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
+      transform: translateY(-4px);
+      background: rgba(2, 132, 199, 0.08);
+      border-color: var(--border-focus);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     }
-    .matrix-card:hover::before { opacity: 0.15; }
-    .matrix-card:hover i { transform: scale(1.15); }
     .matrix-card:hover span { color: #fff; }
 
     /* Sections & Cards */
@@ -306,48 +322,43 @@
       margin-bottom: 28px;
     }
     .sec-header h2 {
-      font-size: 30px;
+      font-size: 28px;
       font-weight: 800;
       letter-spacing: -0.5px;
     }
     .sec-line {
       flex: 1;
       height: 1px;
-      background: linear-gradient(90deg, rgba(99, 102, 241, 0.5), transparent);
+      background: linear-gradient(90deg, rgba(2, 132, 199, 0.4), transparent);
     }
 
     .grid { display: grid; gap: 24px; }
     @media (min-width: 850px) { .grid.cols-2 { grid-template-columns: 1fr 1fr; } }
 
     .glass-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 22px;
-      padding: 30px;
-      backdrop-filter: blur(16px);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 28px;
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow-enterprise);
       position: relative;
       overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition: all 0.3s ease;
+    }
+    .glass-card:hover {
+      border-color: var(--border-focus);
+      box-shadow: 0 12px 35px -5px rgba(0, 0, 0, 0.6);
     }
     
     .card-watermark {
       position: absolute;
       right: -20px;
-      bottom: -30px;
-      font-size: 160px;
-      opacity: 0.07;
+      bottom: -25px;
+      font-size: 150px;
+      opacity: 0.05;
       pointer-events: none;
       z-index: 0;
-      transition: opacity 0.4s ease;
-      animation: naturalFloat 6s ease-in-out infinite alternate;
-    }
-    @keyframes naturalFloat {
-      0% { transform: translateY(0px) rotate(0deg); }
-      100% { transform: translateY(-8px) rotate(3deg); }
-    }
-    .glass-card:hover .card-watermark {
-      opacity: 0.16;
     }
 
     .card-content {
@@ -355,10 +366,10 @@
       z-index: 1;
     }
     .card-title {
-      font-size: 20px;
-      font-weight: 800;
+      font-size: 19px;
+      font-weight: 700;
       color: #fff;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .muted-text {
       color: var(--text-muted);
@@ -366,6 +377,7 @@
       line-height: 1.65;
     }
 
+    /* Skill Pills */
     .pill-matrix {
       display: flex;
       flex-wrap: wrap;
@@ -376,24 +388,56 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 7px 13px;
-      border-radius: 10px;
+      padding: 6px 12px;
+      border-radius: 8px;
       background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       font-size: 13px;
       font-weight: 600;
       color: #e2e8f0;
-      transition: all 0.3s ease;
+      transition: all 0.25s ease;
     }
-    .skill-pill i { font-size: 15px; color: #38bdf8; }
+    .skill-pill i { font-size: 14px; }
     .skill-pill:hover {
-      background: rgba(99, 102, 241, 0.2);
-      border-color: rgba(168, 85, 247, 0.5);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+      background: rgba(2, 132, 199, 0.15);
+      border-color: #38bdf8;
       color: #fff;
     }
 
+    .aws-service-svg {
+      width: 15px;
+      height: 15px;
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================================
+       HOSTING.COM SIGNATURE TYPOGRAPHY BADGE
+       ========================================================================== */
+    .hosting-signature-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(2, 132, 199, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin: 4px 0 16px;
+      font-size: 13px;
+      color: #cbd5e1;
+    }
+    .hosting-signature-brand {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      color: #38bdf8;
+      letter-spacing: -0.4px;
+    }
+    .hosting-signature-brand span {
+      color: #06b6d4;
+    }
+
+    /* Timeline */
     .timeline {
       position: relative;
       padding-left: 32px;
@@ -405,7 +449,7 @@
       top: 12px;
       bottom: 12px;
       width: 2px;
-      background: linear-gradient(180deg, #6366f1, #ec4899, #06b6d4);
+      background: linear-gradient(180deg, #0284c7, #2563eb);
       border-radius: 999px;
     }
     .timeline-item {
@@ -417,18 +461,12 @@
       position: absolute;
       left: -32px;
       top: 6px;
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
-      background: #070913;
-      border: 3px solid #a855f7;
-      box-shadow: 0 0 12px #a855f7;
-      transition: all 0.3s ease;
-    }
-    .timeline-item:hover .timeline-dot {
-      background: #ec4899;
-      box-shadow: 0 0 22px #ec4899;
-      transform: scale(1.3);
+      background: #0f172a;
+      border: 3px solid #38bdf8;
+      box-shadow: 0 0 10px #38bdf8;
     }
     .impact-list {
       list-style: none;
@@ -436,36 +474,33 @@
     }
     .impact-list li {
       position: relative;
-      padding-left: 24px;
+      padding-left: 20px;
       margin-bottom: 9px;
       font-size: 14px;
       color: #cbd5e1;
       line-height: 1.6;
     }
     .impact-list li::before {
-      content: "⚡";
+      content: "•";
       position: absolute;
       left: 0;
-      font-size: 12px;
+      color: #38bdf8;
+      font-size: 18px;
+      line-height: 1;
     }
 
     .media-container {
       margin-top: 18px;
-      border-radius: 14px;
+      border-radius: 12px;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       background: #020617;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
     .media-container video, .media-container img {
       width: 100%;
       height: auto;
       display: block;
-      transition: transform 0.5s ease;
-    }
-    .media-container:hover video, .media-container:hover img {
-      transform: scale(1.02);
     }
 
     .btn-wrap { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
@@ -473,41 +508,40 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 9px;
-      padding: 12px 22px;
-      border-radius: 12px;
-      font-weight: 700;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 8px;
+      font-weight: 600;
       font-size: 14px;
       color: #fff;
       cursor: pointer;
       border: none;
-      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.25s ease;
     }
     .btn-primary {
-      background: var(--grad-primary);
-      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+      background: #0284c7;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
     }
     .btn-cyan {
-      background: var(--grad-cyan);
-      box-shadow: 0 8px 25px rgba(6, 182, 212, 0.35);
+      background: #0d9488;
+      box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35);
     }
     .btn-outline {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.2);
     }
-    .btn-whatsapp { background: #16a34a; box-shadow: 0 8px 25px rgba(22, 163, 74, 0.35); }
-    .btn-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .btn-whatsapp { background: #16a34a; }
+    .btn-instagram { background: #be185d; }
     
     .btn:hover {
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     }
 
     .reveal {
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
     }
     .reveal.active {
       opacity: 1;
@@ -516,20 +550,19 @@
 
     footer {
       border-top: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(4, 6, 15, 0.95);
+      background: #090e1a;
       text-align: center;
-      padding: 40px 20px;
+      padding: 36px 20px;
       color: var(--text-muted);
-      font-size: 14px;
+      font-size: 13.5px;
       margin-top: 80px;
     }
 
     @media (max-width: 800px) {
       .hero .wrap { grid-template-columns: 1fr; text-align: center; }
-      .title { font-size: 34px; }
+      .title { font-size: 32px; }
       .contact-details { justify-content: center; }
-      .avatar { width: 210px; height: 210px; }
-      .avatar-glow { width: 230px; height: 230px; }
+      .avatar { width: 200px; height: 200px; }
       .btn-wrap { justify-content: center; }
       .btn { width: 100%; }
       .nav .wrap { flex-direction: column; gap: 10px; }
@@ -538,9 +571,41 @@
 </head>
 <body>
 
-  <!-- Ambient Background Glows -->
+  <!-- Ambient Light Accents -->
   <div class="ambient-glow glow-1"></div>
   <div class="ambient-glow glow-2"></div>
+
+  <!-- =========================================================================
+       DEVOPS MULTI-COLOR GRADIENT CONTINUOUS FLOWING BACKGROUND
+       ========================================================================= -->
+  <div class="devops-bg-animation-wrap">
+    <svg class="devops-bg-svg" viewBox="0 0 160 90">
+      <defs>
+        <!-- Vibrant DevOps Color Gradient Applied Directly to the Flowing Path -->
+        <linearGradient id="devopsPulseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#009fe3"/>
+          <stop offset="20%" stop-color="#5b3c88"/>
+          <stop offset="40%" stop-color="#e5237f"/>
+          <stop offset="60%" stop-color="#d8232a"/>
+          <stop offset="80%" stop-color="#fbb03b"/>
+          <stop offset="100%" stop-color="#8cc63f"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Subdued Base Track Segments -->
+      <path class="devops-segment" d="M48,16 C30,16 16,30 16,45" stroke="#009fe3"/>
+      <path class="devops-segment" d="M16,45 C16,60 30,74 48,74" stroke="#5b3c88"/>
+      <path class="devops-segment" d="M48,74 C62,74 72,58 80,45" stroke="#e5237f"/>
+      <path class="devops-segment" d="M80,45 L95,28" stroke="#d8232a" stroke-width="25"/>
+      <path class="devops-segment" d="M95,28 C100,20 106,16 112,16" stroke="#f15a24"/>
+      <path class="devops-segment" d="M112,16 C130,16 144,30 144,45" stroke="#fbb03b"/>
+      <path class="devops-segment" d="M144,45 C144,60 130,74 112,74" stroke="#8cc63f"/>
+      <path class="devops-segment" d="M112,74 C98,74 88,58 80,45 C72,32 62,16 48,16" stroke="#00a88f"/>
+
+      <!-- Smooth Fluid Stream using the Full Color Gradient Above -->
+      <path class="continuous-infinity-stream" d="M48,16 C28,16 16,29 16,45 C16,61 28,74 48,74 C64,74 73,59 80,45 C87,31 96,16 112,16 C132,16 144,29 144,45 C144,61 132,74 112,74 C96,74 87,59 80,45 C73,31 64,16 48,16 Z"/>
+    </svg>
+  </div>
 
   <!-- Parallax Floating Background Logos -->
   <div class="parallax-bg-layer">
@@ -584,10 +649,10 @@
         <div class="contact-details font-mono">
           <span>📍 Bengaluru, Karnataka, India</span>
           <span>📞 <a href="tel:+919345530593" style="color:#38bdf8;">+91 9345530593</a></span>
-          <span>✉️ <a href="mailto:madhuran555333@gmail.com" style="color:#a855f7;">madhuran555333@gmail.com</a></span>
+          <span>✉️ <a href="mailto:madhuran555333@gmail.com" style="color:#38bdf8;">madhuran555333@gmail.com</a></span>
         </div>
         <div class="btn-wrap">
-          <a class="btn btn-primary" href="#contact">Let's Connect</a>
+          <a class="btn btn-primary" href="#contact">Contact Me</a>
           <a class="btn btn-cyan" href="#projects">Explore Projects</a>
           <a class="btn btn-outline" href="resume.pdf" download>Download Resume</a>
         </div>
@@ -615,6 +680,10 @@
             <span>Jenkins</span>
           </div>
           <div class="matrix-card">
+            <i class="devicon-grafana-plain colored"></i>
+            <span>Grafana</span>
+          </div>
+          <div class="matrix-card">
             <i class="devicon-mysql-original colored"></i>
             <span>MySQL</span>
           </div>
@@ -630,7 +699,6 @@
       </div>
 
       <div class="avatar-wrapper reveal">
-        <div class="avatar-glow"></div>
         <img class="avatar" src="img.jpg" alt="Madhuran K portrait">
       </div>
     </div>
@@ -671,18 +739,18 @@
           <h3 class="card-title">Networking and Security</h3>
           <p class="muted-text">Network protocols, traffic routing, security firewalls, and hybrid connectivity.</p>
           <div class="pill-matrix">
-            <span class="skill-pill"><i class="fa-solid fa-globe"></i> DNS</span>
-            <span class="skill-pill"><i class="fa-solid fa-network-wired"></i> TCP/IP</span>
-            <span class="skill-pill"><i class="fa-solid fa-sitemap"></i> Subnetting & VLSM</span>
-            <span class="skill-pill"><i class="fa-solid fa-shield-halved"></i> Access Control Lists (ACL)</span>
-            <span class="skill-pill"><i class="fa-solid fa-route"></i> NAT & Routing</span>
-            <span class="skill-pill"><i class="fa-solid fa-fire"></i> Firewall</span>
-            <span class="skill-pill"><i class="fa-solid fa-lock"></i> SSL / TLS</span>
-            <span class="skill-pill"><i class="fa-solid fa-bolt"></i> CDN</span>
-            <span class="skill-pill"><i class="fa-solid fa-scale-balanced"></i> Load Balancing</span>
-            <span class="skill-pill"><i class="fa-solid fa-user-shield"></i> IAM Policies</span>
-            <span class="skill-pill"><i class="fa-solid fa-shield"></i> Security Groups</span>
-            <span class="skill-pill"><i class="fa-solid fa-link"></i> Hybrid Connectivity (Hosting ⇄ AWS)</span>
+            <span class="skill-pill"><i class="fa-solid fa-globe" style="color:#38bdf8;"></i> DNS</span>
+            <span class="skill-pill"><i class="fa-solid fa-network-wired" style="color:#38bdf8;"></i> TCP/IP</span>
+            <span class="skill-pill"><i class="fa-solid fa-sitemap" style="color:#38bdf8;"></i> Subnetting & VLSM</span>
+            <span class="skill-pill"><i class="fa-solid fa-shield-halved" style="color:#38bdf8;"></i> Access Control Lists (ACL)</span>
+            <span class="skill-pill"><i class="fa-solid fa-route" style="color:#38bdf8;"></i> NAT & Routing</span>
+            <span class="skill-pill"><i class="fa-solid fa-fire" style="color:#f59e0b;"></i> Firewall</span>
+            <span class="skill-pill"><i class="fa-solid fa-lock" style="color:#10b981;"></i> SSL / TLS</span>
+            <span class="skill-pill"><i class="fa-solid fa-bolt" style="color:#38bdf8;"></i> CDN</span>
+            <span class="skill-pill"><i class="fa-solid fa-scale-balanced" style="color:#38bdf8;"></i> Load Balancing</span>
+            <span class="skill-pill"><i class="fa-solid fa-user-shield" style="color:#38bdf8;"></i> IAM Policies</span>
+            <span class="skill-pill"><i class="fa-solid fa-shield" style="color:#38bdf8;"></i> Security Groups</span>
+            <span class="skill-pill"><i class="fa-solid fa-link" style="color:#38bdf8;"></i> Hybrid Connectivity (Hosting ⇄ AWS)</span>
           </div>
         </div>
       </div>
@@ -694,20 +762,62 @@
           <h3 class="card-title">Cloud: Amazon Web Services (AWS)</h3>
           <p class="muted-text">Scalable multi-AZ cloud architecture, security, and edge acceleration.</p>
           <div class="pill-matrix">
-            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark"></i> EC2</span>
-            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark"></i> S3</span>
-            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark"></i> IAM</span>
-            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark"></i> VPC</span>
-            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark"></i> ELB & ALB</span>
-            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark"></i> EKS (Kubernetes)</span>
-            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark"></i> Route 53</span>
-            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark"></i> Auto Scaling</span>
-            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark"></i> CloudWatch</span>
-            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark"></i> RDS</span>
-            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark"></i> Security Groups</span>
-            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark"></i> CloudFront</span>
-            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark"></i> NAT Gateway</span>
-            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark"></i> Bastion Host</span>
+            <span class="skill-pill">
+              <svg class="aws-service-svg" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#ff9900" stroke-width="2"/><circle cx="8" cy="8" r="1.5" fill="#ff9900"/><circle cx="16" cy="8" r="1.5" fill="#ff9900"/><path d="M7 16h10" stroke="#ff9900" stroke-width="2" stroke-linecap="round"/></svg>
+              EC2
+            </span>
+            <span class="skill-pill">
+              <svg class="aws-service-svg" viewBox="0 0 24 24" fill="none"><path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3v12c0 1.7-3.6 3-8 3s-8-1.3-8-3V6z" stroke="#56c0a7" stroke-width="2"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3M4 6c0 1.7 3.6 3 8 3s8-1.3 8-3" stroke="#56c0a7" stroke-width="2"/></svg>
+              S3
+            </span>
+            <span class="skill-pill">
+              <svg class="aws-service-svg" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 5v6.5C4 16.5 7.4 21 12 22c4.6-1 8-5.5 8-10.5V5l-8-3z" stroke="#e05243" stroke-width="2"/><circle cx="12" cy="10" r="2.5" stroke="#e05243" stroke-width="1.5"/><path d="M8.5 16c0-1.9 1.6-3.5 3.5-3.5s3.5 1.6 3.5 3.5" stroke="#e05243" stroke-width="1.5"/></svg>
+              IAM
+            </span>
+            <span class="skill-pill">
+              <svg class="aws-service-svg" viewBox="0 0 24 24" fill="none"><path d="M19 18H6a4 4 0 0 1 0-8 6 6 0 0 1 11.5-2A4 4 0 0 1 19 18z" stroke="#8c4fff" stroke-width="2"/><path d="M8 14h8M12 11v6" stroke="#8c4fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+              VPC
+            </span>
+            <span class="skill-pill">
+              <svg class="aws-service-svg" viewBox="0 0 24 24" fill="none"><circle cx="6" cy="12" r="3" stroke="#8c4fff" stroke-width="2"/><circle cx="18" cy="6" r="3" stroke="#8c4fff" stroke-width="2"/><circle cx="18" cy="18" r="3" stroke="#8c4fff" stroke-width="2"/><path d="M9 12h3m0 0l3-5m-3 5l3 5" stroke="#8c4fff" stroke-width="2" stroke-linecap="round"/></svg>
+              ELB & ALB
+            </span>
+            <span class="skill-pill">
+              <i class="devicon-kubernetes-plain" style="color:#326ce5;"></i>
+              EKS (Kubernetes)
+            </span>
+            <span class="skill-pill">
+              <svg class="aws-service-svg" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#8c4fff" stroke-width="2"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" stroke="#8c4fff" stroke-width="1.5"/><path d="M9 10h6l-4 4h4" stroke="#ff9900" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Route 53
+            </span>
+            <span class="skill-pill">
+              <svg class="aws-service-svg" viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="10" height="10" rx="2" stroke="#ff9900" stroke-width="2"/><rect x="11" y="11" width="10" height="10" rx="2" stroke="#ff9900" stroke-width="1.5" stroke-dasharray="2 2"/><path d="M6 3l3 3M21 18l-3-3" stroke="#ff9900" stroke-width="2" stroke-linecap="round"/></svg>
+              Auto Scaling
+            </span>
+            <span class="skill-pill">
+              <svg class="aws-service-svg" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#e05243" stroke-width="2"/><path d="M7 14l3-4 3 3 4-5" stroke="#e05243" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              CloudWatch
+            </span>
+            <span class="skill-pill">
+              <svg class="aws-service-svg" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="6" rx="8" ry="3" stroke="#3b48cc" stroke-width="2"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" stroke="#3b48cc" stroke-width="2"/></svg>
+              RDS
+            </span>
+            <span class="skill-pill">
+              <svg class="aws-service-svg" viewBox="0 0 24 24" fill="none"><path d="M12 3L4 6.5v5c0 5 3.5 9 8 10 4.5-1 8-5 8-10v-5L12 3z" stroke="#e05243" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="#e05243" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Security Groups
+            </span>
+            <span class="skill-pill">
+              <svg class="aws-service-svg" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#8c4fff" stroke-width="2"/><path d="M13 3l-4 8h6l-4 10" stroke="#ff9900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              CloudFront
+            </span>
+            <span class="skill-pill">
+              <svg class="aws-service-svg" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="3" stroke="#8c4fff" stroke-width="2"/><path d="M7 12h10M13 8l4 4-4 4" stroke="#8c4fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              NAT Gateway
+            </span>
+            <span class="skill-pill">
+              <svg class="aws-service-svg" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="3" stroke="#8c4fff" stroke-width="2"/><path d="M9 9h6v6H9zM9 4v2M15 4v2M9 18v2M15 18v2" stroke="#8c4fff" stroke-width="2"/></svg>
+              Bastion Host
+            </span>
           </div>
         </div>
       </div>
@@ -719,20 +829,20 @@
           <h3 class="card-title">Linux Administration</h3>
           <p class="muted-text">Enterprise OS management, process diagnostics, file permissions, and CLI triage.</p>
           <div class="pill-matrix">
-            <span class="skill-pill"><i class="devicon-ubuntu-plain"></i> Ubuntu</span>
-            <span class="skill-pill"><i class="devicon-centos-plain-wordmark"></i> CentOS</span>
-            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark"></i> Amazon Linux</span>
-            <span class="skill-pill"><i class="fa-solid fa-users-gear"></i> User & Group Management</span>
-            <span class="skill-pill"><i class="fa-solid fa-key"></i> File Permissions</span>
-            <span class="skill-pill"><i class="fa-solid fa-hard-drive"></i> Filesystem Management</span>
-            <span class="skill-pill"><i class="fa-solid fa-box-open"></i> Package Management (yum, apt)</span>
-            <span class="skill-pill"><i class="fa-solid fa-gears"></i> Systemd</span>
-            <span class="skill-pill"><i class="fa-solid fa-chart-line"></i> Process Monitoring (top, ps, htop)</span>
-            <span class="skill-pill"><i class="fa-solid fa-clock"></i> Cron Jobs</span>
-            <span class="skill-pill"><i class="fa-solid fa-file-lines"></i> Log Analysis</span>
-            <span class="skill-pill"><i class="devicon-ssh-original"></i> SSH</span>
-            <span class="skill-pill"><i class="devicon-bash-plain"></i> Bash Scripting</span>
-            <span class="skill-pill"><i class="fa-solid fa-screwdriver-wrench"></i> Server Troubleshooting</span>
+            <span class="skill-pill"><i class="devicon-ubuntu-plain colored"></i> Ubuntu</span>
+            <span class="skill-pill"><i class="devicon-centos-plain-wordmark colored"></i> CentOS</span>
+            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark colored"></i> Amazon Linux</span>
+            <span class="skill-pill"><i class="fa-solid fa-users-gear" style="color:#38bdf8;"></i> User & Group Management</span>
+            <span class="skill-pill"><i class="fa-solid fa-key" style="color:#f59e0b;"></i> File Permissions</span>
+            <span class="skill-pill"><i class="fa-solid fa-hard-drive" style="color:#10b981;"></i> Filesystem Management</span>
+            <span class="skill-pill"><i class="fa-solid fa-box-open" style="color:#e05243;"></i> Package Management (yum, apt)</span>
+            <span class="skill-pill"><i class="fa-solid fa-gears" style="color:#a855f7;"></i> Systemd</span>
+            <span class="skill-pill"><i class="fa-solid fa-chart-line" style="color:#38bdf8;"></i> Process Monitoring (top, ps, htop)</span>
+            <span class="skill-pill"><i class="fa-solid fa-clock" style="color:#f59e0b;"></i> Cron Jobs</span>
+            <span class="skill-pill"><i class="fa-solid fa-file-lines" style="color:#10b981;"></i> Log Analysis</span>
+            <span class="skill-pill"><i class="devicon-ssh-original colored"></i> SSH</span>
+            <span class="skill-pill"><i class="devicon-bash-plain colored"></i> Bash Scripting</span>
+            <span class="skill-pill"><i class="fa-solid fa-screwdriver-wrench" style="color:#e05243;"></i> Server Troubleshooting</span>
           </div>
         </div>
       </div>
@@ -744,19 +854,19 @@
           <h3 class="card-title">DevOps and SRE</h3>
           <p class="muted-text">Continuous integration, continuous deployment, containerization, and observability.</p>
           <div class="pill-matrix">
-            <span class="skill-pill"><i class="fa-solid fa-arrows-rotate"></i> Continuous Integration (CI)</span>
-            <span class="skill-pill"><i class="fa-solid fa-rocket"></i> Continuous Deployment (CD)</span>
-            <span class="skill-pill"><i class="devicon-jenkins-line"></i> Jenkins</span>
-            <span class="skill-pill"><i class="devicon-jenkins-line"></i> Jenkinsfile</span>
-            <span class="skill-pill"><i class="fa-solid fa-code"></i> Pipeline as Code</span>
-            <span class="skill-pill"><i class="devicon-git-plain"></i> Git</span>
+            <span class="skill-pill"><i class="fa-solid fa-arrows-rotate" style="color:#38bdf8;"></i> Continuous Integration (CI)</span>
+            <span class="skill-pill"><i class="fa-solid fa-rocket" style="color:#ec4899;"></i> Continuous Deployment (CD)</span>
+            <span class="skill-pill"><i class="devicon-jenkins-line colored"></i> Jenkins</span>
+            <span class="skill-pill"><i class="devicon-jenkins-line colored"></i> Jenkinsfile</span>
+            <span class="skill-pill"><i class="fa-solid fa-code" style="color:#a855f7;"></i> Pipeline as Code</span>
+            <span class="skill-pill"><i class="devicon-git-plain colored"></i> Git</span>
             <span class="skill-pill"><i class="devicon-github-original"></i> GitHub</span>
-            <span class="skill-pill"><i class="fa-solid fa-anchor"></i> GitHub Webhooks</span>
-            <span class="skill-pill"><i class="devicon-docker-plain"></i> Docker</span>
-            <span class="skill-pill"><i class="devicon-kubernetes-plain"></i> Kubernetes</span>
-            <span class="skill-pill"><i class="devicon-prometheus-original"></i> Prometheus</span>
-            <span class="skill-pill"><i class="devicon-grafana-original"></i> Grafana</span>
-            <span class="skill-pill"><i class="fa-solid fa-magnifying-glass-chart"></i> Monitoring & Observability</span>
+            <span class="skill-pill"><i class="fa-solid fa-anchor" style="color:#38bdf8;"></i> GitHub Webhooks</span>
+            <span class="skill-pill"><i class="devicon-docker-plain colored"></i> Docker</span>
+            <span class="skill-pill"><i class="devicon-kubernetes-plain colored"></i> Kubernetes</span>
+            <span class="skill-pill"><i class="devicon-prometheus-original colored"></i> Prometheus</span>
+            <span class="skill-pill"><i class="devicon-grafana-plain colored"></i> Grafana</span>
+            <span class="skill-pill"><i class="fa-solid fa-magnifying-glass-chart" style="color:#10b981;"></i> Monitoring & Observability</span>
           </div>
         </div>
       </div>
@@ -768,16 +878,16 @@
           <h3 class="card-title">Database, Web & Application Servers</h3>
           <p class="muted-text">Web application serving, database installation, user management, and backups.</p>
           <div class="pill-matrix">
-            <span class="skill-pill"><i class="devicon-mysql-original"></i> MySQL</span>
-            <span class="skill-pill"><i class="devicon-azuresqldatabase-plain"></i> MsSQL</span>
-            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark"></i> Amazon RDS</span>
-            <span class="skill-pill"><i class="devicon-apache-plain"></i> Apache HTTP Server (HTTPD)</span>
-            <span class="skill-pill"><i class="devicon-nginx-original"></i> Nginx</span>
-            <span class="skill-pill"><i class="devicon-tomcat-line"></i> Apache Tomcat</span>
-            <span class="skill-pill"><i class="fa-solid fa-server"></i> Virtual Hosts</span>
-            <span class="skill-pill"><i class="fa-solid fa-database"></i> DB Install & Config</span>
-            <span class="skill-pill"><i class="fa-solid fa-users"></i> User Management</span>
-            <span class="skill-pill"><i class="fa-solid fa-floppy-disk"></i> Backup and Restore</span>
+            <span class="skill-pill"><i class="devicon-mysql-original colored"></i> MySQL</span>
+            <span class="skill-pill"><i class="devicon-azuresqldatabase-plain colored"></i> MsSQL</span>
+            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark colored"></i> Amazon RDS</span>
+            <span class="skill-pill"><i class="devicon-apache-plain colored"></i> Apache HTTP Server (HTTPD)</span>
+            <span class="skill-pill"><i class="devicon-nginx-original colored"></i> Nginx</span>
+            <span class="skill-pill"><i class="devicon-tomcat-line colored"></i> Apache Tomcat</span>
+            <span class="skill-pill"><i class="fa-solid fa-server" style="color:#38bdf8;"></i> Virtual Hosts</span>
+            <span class="skill-pill"><i class="fa-solid fa-database" style="color:#f59e0b;"></i> DB Install & Config</span>
+            <span class="skill-pill"><i class="fa-solid fa-users" style="color:#10b981;"></i> User Management</span>
+            <span class="skill-pill"><i class="fa-solid fa-floppy-disk" style="color:#ec4899;"></i> Backup and Restore</span>
           </div>
         </div>
       </div>
@@ -789,20 +899,20 @@
           <h3 class="card-title">Hosting, Email, Automation & Tools</h3>
           <p class="muted-text">Hosting control panel management, mail deliverability, scripting, and remote tools.</p>
           <div class="pill-matrix">
-            <span class="skill-pill"><i class="fa-solid fa-sliders"></i> cPanel & WHM</span>
-            <span class="skill-pill"><i class="fa-solid fa-table-columns"></i> Plesk & OviPanel</span>
-            <span class="skill-pill"><i class="fa-solid fa-folder-tree"></i> FTP / SFTP</span>
-            <span class="skill-pill"><i class="fa-solid fa-envelope"></i> Dovecot</span>
-            <span class="skill-pill"><i class="fa-solid fa-paper-plane"></i> SMTP, IMAP, POP3</span>
-            <span class="skill-pill"><i class="fa-solid fa-envelope-circle-check"></i> MX, SPF, DKIM, DMARC</span>
-            <span class="skill-pill"><i class="devicon-bash-plain"></i> Bash & Shell Scripting</span>
-            <span class="skill-pill"><i class="devicon-python-plain"></i> Python & Boto3</span>
-            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark"></i> AWS CLI</span>
-            <span class="skill-pill"><i class="fa-solid fa-file-code"></i> YAML</span>
-            <span class="skill-pill"><i class="devicon-putty-plain"></i> PuTTY</span>
-            <span class="skill-pill"><i class="fa-solid fa-terminal"></i> MobaXterm</span>
-            <span class="skill-pill"><i class="devicon-filezilla-plain"></i> WinSCP & FileZilla</span>
-            <span class="skill-pill"><i class="fa-brands fa-wordpress"></i> WordPress Hosting & Migration</span>
+            <span class="skill-pill"><i class="fa-solid fa-sliders" style="color:#ff6c2c;"></i> cPanel & WHM</span>
+            <span class="skill-pill"><i class="fa-solid fa-table-columns" style="color:#38bdf8;"></i> Plesk & OviPanel</span>
+            <span class="skill-pill"><i class="fa-solid fa-folder-tree" style="color:#f59e0b;"></i> FTP / SFTP</span>
+            <span class="skill-pill"><i class="fa-solid fa-envelope" style="color:#10b981;"></i> Dovecot</span>
+            <span class="skill-pill"><i class="fa-solid fa-paper-plane" style="color:#ec4899;"></i> SMTP, IMAP, POP3</span>
+            <span class="skill-pill"><i class="fa-solid fa-envelope-circle-check" style="color:#38bdf8;"></i> MX, SPF, DKIM, DMARC</span>
+            <span class="skill-pill"><i class="devicon-bash-plain colored"></i> Bash & Shell Scripting</span>
+            <span class="skill-pill"><i class="devicon-python-plain colored"></i> Python & Boto3</span>
+            <span class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark colored"></i> AWS CLI</span>
+            <span class="skill-pill"><i class="fa-solid fa-file-code" style="color:#ec4899;"></i> YAML</span>
+            <span class="skill-pill"><i class="devicon-putty-plain colored"></i> PuTTY</span>
+            <span class="skill-pill"><i class="fa-solid fa-terminal" style="color:#f59e0b;"></i> MobaXterm</span>
+            <span class="skill-pill"><i class="devicon-filezilla-plain colored"></i> WinSCP & FileZilla</span>
+            <span class="skill-pill"><i class="fa-brands fa-wordpress" style="color:#21759b;"></i> WordPress Hosting & Migration</span>
           </div>
         </div>
       </div>
@@ -820,7 +930,16 @@
       <!-- Role 1 -->
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <h3 class="card-title">Technical Support Engineer — <span class="gradient-cyan-text">OVI Hosting (Part of Hosting.com)</span></h3>
+        <h3 class="card-title">Technical Support Engineer — <span class="gradient-cyan-text">OVI Hosting</span></h3>
+        
+        <!-- Clean Signature Text Badge (Exact hosting.com) -->
+        <div>
+          <div class="hosting-signature-badge">
+            <span>Part of</span>
+            <span class="hosting-signature-brand">hosting<span>.com</span></span>
+          </div>
+        </div>
+
         <p class="muted-text font-mono" style="font-size:13.5px; color:#38bdf8; margin-bottom: 10px;">March 2026 – Present | Bengaluru, Karnataka</p>
         <ul class="impact-list">
           <li>Administer Linux servers (Ubuntu, CentOS) including user and group management, file permissions, process monitoring, package management (yum, apt), and service troubleshooting to maintain hosting availability.</li>
